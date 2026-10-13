@@ -1,0 +1,55 @@
+Task 3: Bloom Filter Benchmark Results
+
+Configuration:
+- Bit array size: 80,000 bits
+- Number of inserted items: 8,000
+- Number of queried items: 200,000
+- Optimal number of hash functions: k = 7
+
+Baseline implementation:
+- False positives: 19,023
+- False-positive rate: 9.511%
+- False negatives: 0
+- Memory budget: 80,000 bits
+
+Improved implementation:
+- False positives: 1,620
+- False-positive rate: 0.810%
+- False negatives: 0
+- Memory budget: 80,000 bits
+
+Comparison:
+- False-positive rate reduced by approximately 91.5%
+- False negatives: 0
+- Theoretical minimum false-positive rate: approximately 0.82%
+- Measured false-positive rate is close to the theoretical minimum.
+
+R6: Derivation of optimal hash count
+
+The approximate false-positive rate of a Bloom Filter is:
+
+p ≈ (1 - exp(-kn/m))^k
+
+The optimal number of hash functions is:
+
+k_optimal = (m/n) ln(2)
+
+For m = 80,000 bits and n = 8,000 inserted items:
+
+k_optimal = (80,000 / 8,000) ln(2)
+          = 10 × 0.6931
+          ≈ 6.93
+
+Therefore, the selected integer value is k = 7.
+
+The theoretical minimum false-positive rate is approximately:
+
+p_min ≈ (0.6185)^(m/n)
+      = (0.6185)^10
+      ≈ 0.0082 = 0.82%
+
+Conclusion:
+Using 7 hash functions reduced the false-positive rate from 9.511% to 0.810% while maintaining the same 80,000-bit memory budget and zero false negatives. The measured result is close to the theoretical minimum.
+
+Note:
+The values above are from the recorded benchmark results. Execution time is omitted because the recorded results provided here do not include timing measurements.
